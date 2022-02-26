@@ -1,3 +1,4 @@
+import 'package:breake/ui/backpack/feed.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const SecondPage(),
+          home: const FeedScreen(),
         );
       },
     );
