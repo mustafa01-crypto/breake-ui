@@ -49,8 +49,61 @@ class _FeedScreenState extends State<FeedScreen> {
               SizedBox(
                 height: 4.h,
               ),
+              popularTitle(),
+              SizedBox(
+                height: 2.h,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    children: List.generate(
+                        _images.length,
+                        (index) => Stack(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: 5.w, right: 1.w, bottom: 1.h),
+                                  width: 41.w,
+                                  height: 26.h,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.w),
+                                      image: DecorationImage(
+                                          image: NetworkImage(_images[index]),
+                                          colorFilter: const ColorFilter.mode(
+                                              Colors.black38, BlendMode.darken),
+                                          fit: BoxFit.cover)),
+                                ),
+                                Positioned(
+                                  bottom: 2.5.h,
+                                  left: 7.w,
+                                  child: Text(
+                                    imageNames[index],
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              ],
+                            ))),
+              )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Padding popularTitle() {
+    return Padding(
+      padding: EdgeInsets.only(left: 5.w),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          "Popular destinations",
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp),
         ),
       ),
     );
@@ -172,7 +225,7 @@ class _FeedScreenState extends State<FeedScreen> {
         imageList: _images,
         showTotalCount: true,
         totalCount: 4,
-        itemRadius: 13.w, // Radius of each images
+        itemRadius: 7.w, // Radius of each images
         itemCount: 2, // Maximum number of images to be shown in stack
         itemBorderWidth: 1, // Border width around the images
       ),
@@ -277,18 +330,11 @@ class _FeedScreenState extends State<FeedScreen> {
 
   Widget postRow() {
     return Container(
-      padding: EdgeInsets.only(left: 1.w, right: 1.w, top: 1.w),
+      padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 1.w),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(2.w),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              offset: const Offset(-2, -2),
-              blurRadius: 1,
-              spreadRadius: -1,
-            )
-          ]),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(2.w),
+      ),
       child: Row(
         children: [
           Container(
@@ -338,7 +384,8 @@ class _FeedScreenState extends State<FeedScreen> {
           controller: t1,
           decoration: InputDecoration(
               hintText: "Enter a name of a city you're traveling to",
-              hintStyle: TextStyle(color: Color(0xFF9F9F9F), fontSize: 12.sp),
+              hintStyle:
+                  TextStyle(color: const Color(0xFF9F9F9F), fontSize: 12.sp),
               isDense: true,
               border: InputBorder.none),
         ),
